@@ -5,6 +5,7 @@ import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.service.EmployeeService;
 import com.mindex.challenge.service.CompensationService;
 import com.mindex.challenge.dao.CompensationRepository;
+import com.mindex.challenge.dao.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,18 @@ import org.springframework.stereotype.Service;
 public class CompensationServiceImpl implements CompensationService {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
-
-    @Autowired
-    private EmployeeService employeeService;
-
     @Autowired
     private CompensationRepository compensationRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Override
     public Compensation create(Compensation compensation) {
         LOG.debug("Creating compensation [{}]", compensation);
-        Employee employee = employeeService.read(compensation.getEmployee().getEmployeeId());
-        compensation.setEmployee(employee);
+
+        //Employee employee = employeeService.read(compensation.getEmployee().getEmployeeId());
+        //compensation.setEmployee(employee);
         compensationRepository.insert(compensation);
 
         return compensation;
@@ -33,10 +34,13 @@ public class CompensationServiceImpl implements CompensationService {
 
     @Override
     public Compensation read(String id) {
-        LOG.debug("Reading compensation by using employee's ID[{}]", id);
-        Employee employee = employeeService.read(id);
-        Compensation compensation = compensationRepository.findByEmployee((employee));
-        if (compensation == null) throw new RuntimeException("Compensation error for employee's id:" + id);
+        LOG.debug("Reading compensation by using employee's ID [{}]", id);
+        Employee employee = employeeRepository.findByEmployeeId(id);
+        if (employee == null) { throw new RuntimeException("Employee ID is not valid " + id); }
+
+        Compensation compensation = compensationRepository.findByEmployee(employee);
+        if (compensation == null) { throw new RuntimeException("Compensation error for employee's id:" + id); }
+
         return compensation;
     }
 }
