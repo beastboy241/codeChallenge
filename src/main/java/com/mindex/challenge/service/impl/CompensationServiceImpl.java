@@ -21,12 +21,15 @@ public class CompensationServiceImpl implements CompensationService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     @Override
     public Compensation create(Compensation compensation) {
         LOG.debug("Creating compensation [{}]", compensation);
 
-        //Employee employee = employeeService.read(compensation.getEmployee().getEmployeeId());
-        //compensation.setEmployee(employee);
+        Employee employee = employeeService.read(compensation.getEmployee().getEmployeeId());
+        compensation.setEmployee(employee);
         compensationRepository.insert(compensation);
 
         return compensation;

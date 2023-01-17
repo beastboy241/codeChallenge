@@ -36,22 +36,14 @@ public class DataBootstrapTest {
 
     @Test
     public void testCompensation() {
-        Employee employee = employeeRepository.findByEmployeeId("16a596ae-edd3-4847-99fe-c4518e82c86f");
-        Compensation expectedCompensation = new Compensation();
-        expectedCompensation.setEmployee(employee);
-        expectedCompensation.setSalary("85000");
-        expectedCompensation.setEffectiveDate(new Date());
-        compensationRepository.insert(expectedCompensation);
-
-        Compensation testCompensation = compensationRepository.findByEmployee(employee);
-        assertNotNull(testCompensation);
-        assertNotNull(testCompensation.getEmployee());
-        assertEquals(expectedCompensation.getEmployee().getFirstName(), testCompensation.getEmployee().getFirstName());
-        assertEquals(expectedCompensation.getEmployee().getLastName(), testCompensation.getEmployee().getLastName());
-        assertEquals(expectedCompensation.getEmployee().getPosition(), testCompensation.getEmployee().getPosition());
-        assertEquals(expectedCompensation.getEmployee().getDepartment(), testCompensation.getEmployee().getDepartment());
-        assertEquals(expectedCompensation.getSalary(), testCompensation.getSalary());
-        assertEquals(expectedCompensation.getEffectiveDate(), testCompensation.getEffectiveDate());
+        Compensation compensation = compensationRepository.findCompensationByEmployeeId("b7839309-3348-463b-a7e3-5de1c168beb3");
+        assertNotNull(compensation);
+        assertEquals("Paul", compensation.getEmployee().getFirstName());
+        assertEquals("McCartney", compensation.getEmployee().getLastName());
+        assertEquals("Developer I", compensation.getEmployee().getPosition());
+        assertEquals("Engineering", compensation.getEmployee().getDepartment());
+        assertEquals(85000, compensation.getSalary());
+        assertEquals("01/16/2023", compensation.getEffectiveDate());
 
     }
 }
