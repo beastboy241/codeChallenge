@@ -47,7 +47,7 @@ public class DataBootstrapTest {
         assertEquals("McCartney", compensation.getEmployee().getLastName());
         assertEquals("Developer I", compensation.getEmployee().getPosition());
         assertEquals("Engineering", compensation.getEmployee().getDepartment());
-        assertEquals(85000, compensation.getSalary());
+        assertEquals("85000", compensation.getSalary());
         assertEquals("01/16/2023", compensation.getEffectiveDate());
 
     }
