@@ -39,9 +39,11 @@ public class CompensationServiceImpl implements CompensationService {
     public Compensation read(String id) {
         LOG.debug("Reading compensation by using employee's ID [{}]", id);
         Employee employee = employeeRepository.findByEmployeeId(id);
+        // Throw error if ID is not valid
         if (employee == null) { throw new RuntimeException("Employee ID is not valid " + id); }
 
         Compensation compensation = compensationRepository.findByEmployee(employee);
+        // Throw error if compensation is empty
         if (compensation == null) { throw new RuntimeException("Compensation error for employee's id:" + id); }
 
         return compensation;

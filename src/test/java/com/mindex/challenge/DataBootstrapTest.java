@@ -34,9 +34,14 @@ public class DataBootstrapTest {
         assertEquals("Engineering", employee.getDepartment());
     }
 
+    // Add junit test for compensation
+    // A junit test was successfully implemented, which tests the creation
+    // of a compensation for a specific employee ( Paul McCartney )
     @Test
     public void testCompensation() {
-        Compensation compensation = compensationRepository.findCompensationByEmployeeId("b7839309-3348-463b-a7e3-5de1c168beb3");
+        Employee employee = employeeRepository.findByEmployeeId("b7839309-3348-463b-a7e3-5de1c168beb3");
+        Compensation compensation = compensationRepository.findByEmployee(employee);
+        assertNotNull(employee);
         assertNotNull(compensation);
         assertEquals("Paul", compensation.getEmployee().getFirstName());
         assertEquals("McCartney", compensation.getEmployee().getLastName());

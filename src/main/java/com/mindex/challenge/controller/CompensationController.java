@@ -14,7 +14,7 @@ public class CompensationController {
 
     @Autowired
     private CompensationService compensationService;
-
+    // Create task
     @PostMapping("/compensation")
     public Compensation create(@RequestBody Compensation compensation) {
         LOG.debug("Compensation CREATE request received [{}] ", compensation);
@@ -22,6 +22,7 @@ public class CompensationController {
         return compensationService.create(compensation);
     }
 
+    // Read task using the employee Id
     @GetMapping("/compensation/{id}")
     public Compensation read(@PathVariable String id) {
         LOG.debug("Compensation READ request received with ID [{}]", id);
