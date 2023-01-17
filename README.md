@@ -84,3 +84,8 @@ Compensation from the persistence layer.
 
 ## Delivery
 Please upload your results to a publicly accessible Git repo. Free ones are provided by Github and Bitbucket.
+
+## Explaination
+Task 1 was completed successfully as it outputs to the browser the total number of report with employee's ID
+Task 2 was completed successfully. However, in order to test this, a Junit test was created which tests 
+the creation of a compensation for a specific employee
